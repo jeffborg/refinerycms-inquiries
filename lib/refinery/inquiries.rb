@@ -2,6 +2,7 @@ require 'refinerycms-core'
 require 'refinerycms-settings'
 require 'filters_spam'
 require 'acts_as_indexed'
+require "recaptcha/rails"
 
 module Refinery
   autoload :InquiriesGenerator, 'generators/refinery/inquiries/inquiries_generator'
