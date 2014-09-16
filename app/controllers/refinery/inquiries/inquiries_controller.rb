@@ -16,7 +16,7 @@ module Refinery
         @inquiry = ::Refinery::Inquiries::Inquiry.new(params[:inquiry])
 
         if @inquiry.valid? && (Recaptcha.configuration.private_key.blank? || verify_recaptcha(attribute: :recaptcha, model: @inquiry)) && @inquiry.save
-          if @inquiry.ham? || Refinery::Inquiries.send_notifications_for_inquiries_marked_as_spam
+          if @inquiry.ham? || Refinery::Inquiries.send_notifications_for_inquiries_marked_as_spam || Recaptcha.configuration.private_key.present?
             begin
               ::Refinery::Inquiries::InquiryMailer.notification(@inquiry, request).deliver
             rescue
